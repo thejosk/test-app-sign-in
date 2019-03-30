@@ -1,11 +1,37 @@
-<h1>Home Page</h1>
-
 <% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Sign Up', new_user_registration_path %>
+  <h4 style="display: inline">Account Details </h4>
+  <div style="float: right">
+    <div>Logged in as <strong><%= current_user.email %></strong>.</div>
+    <%= link_to 'Edit profile', edit_user_registration_path %> |
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+  </div>
 
-  <%= link_to 'Sign In', new_user_session_path %>
+  <div class="field">
+    <label>Profile Picture</label><br />
+    <%= image_tag(current_user.profile_picture_url) %>
+  </div>
+
+ <div class="field">
+    <label>First Name</label><br />
+    <%= current_user.first_name %>
+  </div>
+
+  <div class="field">
+    <label>Last Name</label><br />
+    <%= current_user.last_name %>
+  </div>
+
+  <div class="field">
+    <label>Date of Birth</label><br />
+    <%= current_user.date_of_birth.strftime "%B %e, %Y" %>
+  </div>
+
+  <div class="field">
+    <label>Email</label><br />
+    <%= current_user.email %>
+  </div>
+<% else %>
+  <h4 style="display: inline">Welcome !</h4>
+  <div style="float: right;"><%= link_to 'Sign Up', new_user_registration_path %> |
+  <%= link_to 'Sign In', new_user_session_path %></div>
 <% end %>
